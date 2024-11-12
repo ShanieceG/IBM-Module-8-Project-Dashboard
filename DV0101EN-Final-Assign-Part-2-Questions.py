@@ -95,7 +95,7 @@ def update_output_container(selected_statistics, input_year):
         average_sales = recession_data.groupby('Vehicle_Type')['Automobile_Sales'].mean().reset_index()                 
         R_chart2  = dcc.Graph(
             figure=px.bar(average_sales,
-            x='Vehicle Type',
+            x='Vehicle_Type',
             y='Automobile_Sales',
             title="Average Number of Vehicles Sold by Vehicle Type"))
         
@@ -155,9 +155,9 @@ def update_output_container(selected_statistics, input_year):
   # Plot bar chart for average number of vehicles sold during the given year
          # grouping data for plotting.
          # Hint:Use the columns Year and Automobile_Sales
-        avr_vdata=yearly_data.groupby('Year')['Automobile_Sales'].mean().reset_index()
+        avr_vdata=yearly_data.groupby('Vehicle_Type')['Automobile_Sales'].mean().reset_index()
         Y_chart3 = dcc.Graph(figure=px.bar(avr_vdata,
-        x='Year',
+        x='Vehicle_Type',
         y='Automobile_Sales',
         title='Average Vehicles Sold by Vehicle Type in the year {}'.format(input_year)))
 
@@ -175,10 +175,9 @@ def update_output_container(selected_statistics, input_year):
                 html.Div(className='chart-item', children=[html.Div(children=Y_chart1),html.Div(children=Y_chart2)],style={'display':'flex'}),
                 html.Div(className='chart-item', children=[html.Div(children=Y_chart3), html.Div(children=Y_chart4)],style={'display': 'flex'})
 	]
-    else
+    else:
         return None
         
 # Run the Dash app
 if __name__ == '__main__':
     app.run_server(debug=True)
-
